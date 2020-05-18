@@ -20,7 +20,7 @@ import static com.example.project.R.layout.activity_main;
 public class MainActivity extends Activity {
 //    Firebase é uma plataforma Web que nos permite salvar os dados de nossas aplicações na base de dados NoSQL provida por eles.
     //    criando o firebase
-    private FirebaseAuth mAuth;
+    private FirebaseAuth Auth;
     private EditText Usuario;
     private EditText Senha;
 
@@ -30,10 +30,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(activity_main);
 //        instaciando o firebase
-        mAuth = FirebaseAuth.getInstance();
+        Auth = FirebaseAuth.getInstance();
 
         Usuario = findViewById(R.id.editTextUsuario);
         Senha = findViewById(R.id.editTextCsenha);
+
 
     }
 
@@ -41,7 +42,7 @@ public class MainActivity extends Activity {
     protected void onStart() {
         super.onStart();
         //pegando o usuario atual QUE É mAuth
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseUser currentUser = Auth.getCurrentUser();
 //        com esse usuario atual nós vamos falar para nossa view para se comportar de acordo com esse usuario
         updateUI(currentUser);
     }
@@ -60,6 +61,7 @@ public class MainActivity extends Activity {
 //        peguei a string email
         if(email.equals("")){
             Usuario.setError("Preencha este campo!");
+            return;
 //            coloquei o return caso um deles estiverem vazios para que o usuario não tente preencher o campo, para apenas que de o erro
         }
 //        se o campo senha estiver vazio irá passar a seguinte mensagem de erro
@@ -69,14 +71,14 @@ public class MainActivity extends Activity {
             return;
         }
 //        agora se os dois estiverem preenchidos o usuario pode fazer o login
-        mAuth.signInWithEmailAndPassword(email,senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        Auth.signInWithEmailAndPassword(email,senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 //                entrara quando o login for completo if(task.isSuccessful()){}
                 if(task.isSuccessful()){
 //                    então se deu tudo certo, posso pegar e dar um updateUI no usuario
 //                    ou seja nós vamos passar para a proxima tela
-                    updateUI(mAuth.getCurrentUser());
+                    updateUI(Auth.getCurrentUser());
 //                    caso der errado
                 } else {
 //                    então se der errado aparecerá o usuario ou senha incorreta
@@ -88,7 +90,7 @@ public class MainActivity extends Activity {
         });
     }
 
-//colocando o cadastro
+//colocando o  cadastro
     public void cadastro(View view){
 //        ir para teal de cadastro!
         Intent i = new Intent(MainActivity.this, Cadastro.class);

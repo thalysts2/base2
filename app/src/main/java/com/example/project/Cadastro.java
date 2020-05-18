@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +26,7 @@ import static com.example.project.R.layout.activity_cadastro;
  */
 public class Cadastro extends Activity {
     //    objeto resposanvel por autorizar os nossos usaurios
-    private FirebaseAuth mAuth;
+    private FirebaseAuth Auth;
 
     private EditText Nome;
     private EditText Cpf;
@@ -37,14 +38,16 @@ public class Cadastro extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_cadastro);
+
 //        instaciando
-        mAuth = FirebaseAuth.getInstance();
+        Auth = FirebaseAuth.getInstance();
 
         Nome = findViewById(R.id.editTextNome);
         Cpf = findViewById(R.id.editTextCpf);
         Nascimento= findViewById(R.id.editTextNascimento);
         Email=findViewById(R.id.editTextEmail);
         Csenha=findViewById(R.id.editTextCsenha);
+
     }
     //
     public void salvar(View view) {
@@ -57,36 +60,36 @@ public class Cadastro extends Activity {
         if(nome.equals("")){
             Nome.setError("Preencha este campo!");
 //            vai pedir um um foco neste campo
-            Nome.setError("Preencha este campo");
+
             return;
         }
 //        abaxo irei tratar dos casos que os campos não foram preenchidos, dando um aviso para prencheer
         if(email.equals("")) {
             Email.setError("Preencha este campo!");
 //            vai pedir um um foco neste campo
-            Email.setError("Preencha este campo");
+
             return;
         }
         if(cpf.equals("")) {
             Cpf.setError("Preencha este campo!");
 //            vai pedir um um foco neste campo
-            Cpf.setError("Preencha este campo");
+
             return;
         }
         if(nascimento.equals("")) {
             Nascimento.setError("Preencha este campo!");
 //            vai pedir um um foco neste campo
-            Nascimento.setError("Preencha este campo");
+
             return;
         }
         if(senha.equals("")) {
             Csenha.setError("Preencha este campo!");
 //            vai pedir um um foco neste campo
-            Csenha.setError("Preencha este campo");
+
             return;
         }
 //        se nem um deles estiverem vazios
-        mAuth.createUserWithEmailAndPassword(email,senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        Auth.createUserWithEmailAndPassword(email,senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 //         ou seja se for um sucesso,vai cadastrar o nosso usuario.
@@ -96,6 +99,7 @@ public class Cadastro extends Activity {
                     try {
                         throw task.getException();
 //                        caso seja uma essa fraca
+//                        no firebase exige pelo menos 8 digitos na senha
                     } catch (FirebaseAuthWeakPasswordException e ){
                         Csenha.setError("Senha fraca!");
 //                        pedindo uma atenção no campo senha
@@ -116,4 +120,12 @@ public class Cadastro extends Activity {
             }
         });
     }
+    public void voltar(View view){
+//        voltando para teal de login com image button!
+        Intent i = new Intent(Cadastro.this, MainActivity.class);
+//        executando
+        startActivity(i);
+    }
+
+
 }
