@@ -20,10 +20,10 @@ import static com.example.project.R.layout.activity_main;
 public class MainActivity extends Activity {
 //    Firebase é uma plataforma Web que nos permite salvar os dados de nossas aplicações na base de dados NoSQL provida por eles.
     //    criando o firebase
+
     private FirebaseAuth Auth;
     private EditText Usuario;
     private EditText Senha;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
