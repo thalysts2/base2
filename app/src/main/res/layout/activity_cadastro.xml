@@ -64,7 +64,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Data de nascimento"
-        android:inputType="date|numberSigned|number"
+        android:inputType="date|datetime"
         android:textColorHint="#BA304FFE"
         app:layout_constraintEnd_toEndOf="@+id/editTextCpf"
         app:layout_constraintStart_toStartOf="@+id/editTextCpf"

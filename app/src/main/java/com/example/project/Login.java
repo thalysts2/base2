@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import static com.example.project.R.layout.activity_main;
 
-public class MainActivity extends Activity {
+public class Login extends Activity {
 //    Firebase é uma plataforma Web que nos permite salvar os dados de nossas aplicações na base de dados NoSQL provida por eles.
     //    criando o firebase
 
@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
 //                    caso der errado
                 } else {
 //                    então se der errado aparecerá o usuario ou senha incorreta
-                    Toast.makeText(MainActivity.this,"Usuário ou senha incorreta!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"Usuário ou senha incorreta!",Toast.LENGTH_SHORT).show();
 //                    direcionando para o update e deixnado como null(nulo) ou seja não tem usuario
                     updateUI(null);
                 }
@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
 //colocando o  cadastro
     public void cadastro(View view){
 //        ir para teal de cadastro!
-        Intent i = new Intent(MainActivity.this, Cadastro.class);
+        Intent i = new Intent(Login.this, Cadastro.class);
 //        executando
         startActivity(i);
     }

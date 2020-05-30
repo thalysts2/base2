@@ -26,8 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.example.project.R.layout.activity_cadastro;
-
 /**
  *
  */
@@ -47,7 +45,7 @@ public class Cadastro extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(activity_cadastro);
+        setContentView(R.layout.activity_cadastro);
 
 //        instaciando
         Auth = FirebaseAuth.getInstance();
@@ -144,7 +142,7 @@ public class Cadastro extends Activity {
     }
     public void voltar(View view){
 //        voltando para teal de login com image button!
-        Intent i = new Intent(Cadastro.this, MainActivity.class);
+        Intent i = new Intent(Cadastro.this, Login.class);
 
 //        executando
         startActivity(i);
