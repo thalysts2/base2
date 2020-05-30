@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,77 +26,73 @@ public class Login extends Activity {
     private FirebaseAuth Auth;
     private EditText Usuario;
     private EditText Senha;
+     private Button Cadastrar, Entrar;
+    private TextView txtResetSenha;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_main);
-//        instaciando o firebase
-        Auth = FirebaseAuth.getInstance();
-
-        Usuario = findViewById(R.id.editTextUsuario);
-        Senha = findViewById(R.id.editTextCsenha);
-
-
+        inicializaComponentes();
+        eventoClicks();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //pegando o usuario atual QUE É mAuth
-        FirebaseUser currentUser = Auth.getCurrentUser();
-//        com esse usuario atual nós vamos falar para nossa view para se comportar de acordo com esse usuario
-        updateUI(currentUser);
-    }
-
-//    criando a update
-    private void updateUI(FirebaseUser user){
-        if(user!= null){
-//            passar para a proxima tela! ses nós temos o usuario logado nós vamos passar para a proxima tela
-        }
-    }
-//    foi colocado na activity(view) no buttonEntrar o metodo Onclick e está adiconando esse comando aqui para reconhecer
-    public void login(View view){
-        String email = Usuario.getText().toString().trim();
-        String senha= Senha.getText().toString().trim();
-//        se o campo do email esta vazio vamos falar o seguinte mensagem
-//        peguei a string email
-        if(email.equals("")){
-            Usuario.setError("Preencha este campo!");
-            return;
-//            coloquei o return caso um deles estiverem vazios para que o usuario não tente preencher o campo, para apenas que de o erro
-        }
-//        se o campo senha estiver vazio irá passar a seguinte mensagem de erro
-//        peguei a String senha
-        if(senha.equals("")){
-            Senha.setError("Preencha este campo!");
-            return;
-        }
-//        agora se os dois estiverem preenchidos o usuario pode fazer o login
-        Auth.signInWithEmailAndPassword(email,senha).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+    private void eventoClicks() {
+//    button registrando um novo cadastro
+        Cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-//                entrara quando o login for completo if(task.isSuccessful()){}
-                if(task.isSuccessful()){
-//                    então se deu tudo certo, posso pegar e dar um updateUI no usuario
-//                    ou seja nós vamos passar para a proxima tela
-                    updateUI(Auth.getCurrentUser());
-//                    caso der errado
-                } else {
-//                    então se der errado aparecerá o usuario ou senha incorreta
-                    Toast.makeText(Login.this,"Usuário ou senha incorreta!",Toast.LENGTH_SHORT).show();
-//                    direcionando para o update e deixnado como null(nulo) ou seja não tem usuario
-                    updateUI(null);
-                }
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Cadastro.class);
+                startActivity(i);
+            }
+        });
+
+        Entrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = Usuario.getText().toString().trim();
+                String senha = Senha.getText().toString().trim();
+                login(email, senha);
+            }
+        });
+        txtResetSenha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(com.example.project.Login.this,ResetSenha.class);
+                startActivity(i);
             }
         });
     }
 
-//colocando o  cadastro
-    public void cadastro(View view){
-//        ir para teal de cadastro!
-        Intent i = new Intent(Login.this, Cadastro.class);
-//        executando
-        startActivity(i);
+    private void login(String email, String senha) {
+//        chamando o objeto aut para autenticar
+        Auth.signInWithEmailAndPassword(email, senha)
+//                passando a activity onde estou
+                .addOnCompleteListener(com.example.project.Login.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+//                            para onde vamos dirigir ao final da configuração
+                            Intent i = new Intent(com.example.project.Login.this, Perfil.class);
+                            startActivity(i);
+                        } else {
+                            alert("email ou senha errados");
+                        }
+                    }
+                });
+    }
+
+    private void alert(String email_ou_senha_errados) {
+        Toast.makeText(com.example.project.Login.this,email_ou_senha_errados,Toast.LENGTH_SHORT).show();
+    }
+
+    private void inicializaComponentes() {
+        @Override
+        protected void onStart() {
+            super.onStart();
+            Auth= Conexao.getFirebaseAuth();
+
+        }
     }
 }
