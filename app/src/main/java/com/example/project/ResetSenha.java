@@ -29,11 +29,10 @@ import java.util.Map;
 /**
  *
  */
-public class ResetSenha extends AppCompatActivity {
+public class ResetSenha extends Activity {
     private EditText editEmail;
-    private Button btnResetSenha;
-    private FirebaseAuth auth;
-    @Override
+    private Button Confirmar;
+    private FirebaseAuth Auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +42,18 @@ public class ResetSenha extends AppCompatActivity {
     }
 
     private void eventoClick() {
-        btnResetSenha.setOnClickListener(new View.OnClickListener() {
+        Confirmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email= editEmail.getText().toString().trim();
-                btnResetSenha(email);
+                Confirmar(email);
 
             }
         });
     }
 
-    private void btnResetSenha(String email) {
-        auth.sendPasswordResetEmail(email)
+    private void Confirmar(String email) {
+        Auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(ResetSenha.this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -73,12 +72,12 @@ public class ResetSenha extends AppCompatActivity {
     }
 
     private void inicializaComponentes(){
-        editEmail = findViewById(R.id.editResetEmail);
-        btnResetSenha= findViewById(R.id.btnResetSenha);
+        editEmail = findViewById(R.id.editEmail);
+        Confirmar= findViewById(R.id.buttonConfirmar);
     }
     @Override
     protected void onStart(){
         super.onStart();
-        auth = Conexao.getFirebaseAuth();
+        Auth = Conexao.getFirebaseAuth();
     }
 }

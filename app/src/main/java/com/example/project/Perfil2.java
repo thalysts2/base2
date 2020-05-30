@@ -1,20 +1,19 @@
 package com.example.project;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Perfil extends AppCompatActivity {
-    private TextView textEmail, textID;
-    private Button btnLogOut;
+public class Perfil2 extends Activity {
+    private TextView textViewEmail,textViewUid,textViewCpf,textViewNascimento;
+    private Button Logout;
 
-    private FirebaseAuth auth;
+    private FirebaseAuth Auth;
     private FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class Perfil extends AppCompatActivity {
     }
 
     private void eventoClick() {
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
+        Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Conexao.logOut();
@@ -37,16 +36,18 @@ public class Perfil extends AppCompatActivity {
     }
 
     private void inicializaComponentes() {
-        textEmail = findViewById();
-        textID= findViewById();
-        btnLogOut = findViewById();
+        textViewEmail = findViewById(R.id.textViewEmail);
+        textViewUid= findViewById(R.id.textViewUid);
+        textViewCpf= findViewById(R.id.textViewCpf);
+        textViewNascimento= findViewById(R.id.textViewNascimento);
+        Logout = findViewById(R.id.buttonLogout);
     }
 
     @Override
     protected void onStart(){
         super.onStart();
 //        salvando as informações
-        auth = Conexao.getFirebaseAuth();
+        Auth = Conexao.getFirebaseAuth();
 //        informações do usuario
         user= Conexao.getFirebaseUser();
         verificaUser();
@@ -60,8 +61,11 @@ public class Perfil extends AppCompatActivity {
             finish();
 //            caso não eu vou pegar as informações contidas desse usuario e exibilas no edit email e no textid
         }else{
-            textEmail.setText("Email"+user.getEmail());
-            textID.setText("ID:"+user.getUid());
+            textViewEmail.setText("Email"+user.getEmail());
+            textViewUid.setText("ID:"+user.getUid());
+            textViewCpf.setText("ID:"+user.getUid());
+            textViewNascimento.setText("ID:"+user.getUid());
+
         }
     }
 }

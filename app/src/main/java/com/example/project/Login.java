@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import static com.example.project.R.layout.activity_main;
 
@@ -26,21 +25,25 @@ public class Login extends Activity {
     private FirebaseAuth Auth;
     private EditText Usuario;
     private EditText Senha;
-     private Button Cadastrar, Entrar;
-    private TextView txtResetSenha;
+    private Button btnCadastrar, btnEntrar;
+    private TextView txtRsenha;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_main);
-        inicializaComponentes();
+        inicializarComponentes();
         eventoClicks();
     }
 
+    private void inicializarComponentes() {
+    }
+
+
     private void eventoClicks() {
 //    button registrando um novo cadastro
-        Cadastrar.setOnClickListener(new View.OnClickListener() {
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), Cadastro.class);
@@ -48,7 +51,8 @@ public class Login extends Activity {
             }
         });
 
-        Entrar.setOnClickListener(new View.OnClickListener() {
+
+        btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String email = Usuario.getText().toString().trim();
@@ -56,10 +60,10 @@ public class Login extends Activity {
                 login(email, senha);
             }
         });
-        txtResetSenha.setOnClickListener(new View.OnClickListener() {
+        txtRsenha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(com.example.project.Login.this,ResetSenha.class);
+                Intent i = new Intent(Login.this, ResetSenha.class);
                 startActivity(i);
             }
         });
@@ -69,12 +73,12 @@ public class Login extends Activity {
 //        chamando o objeto aut para autenticar
         Auth.signInWithEmailAndPassword(email, senha)
 //                passando a activity onde estou
-                .addOnCompleteListener(com.example.project.Login.this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
 //                            para onde vamos dirigir ao final da configuração
-                            Intent i = new Intent(com.example.project.Login.this, Perfil.class);
+                            Intent i = new Intent(Login.this, Perfil2.class);
                             startActivity(i);
                         } else {
                             alert("email ou senha errados");
@@ -84,15 +88,33 @@ public class Login extends Activity {
     }
 
     private void alert(String email_ou_senha_errados) {
-        Toast.makeText(com.example.project.Login.this,email_ou_senha_errados,Toast.LENGTH_SHORT).show();
+        Toast.makeText(com.example.project.Login.this, email_ou_senha_errados, Toast.LENGTH_SHORT).show();
     }
 
-    private void inicializaComponentes() {
-        @Override
-        protected void onStart() {
-            super.onStart();
-            Auth= Conexao.getFirebaseAuth();
 
-        }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Auth = Conexao.getFirebaseAuth();
+    }
+
+    public void setUsuario(EditText usuario) {
+        Usuario = usuario;
+    }
+
+    public void setSenha(EditText senha) {
+        Senha = senha;
+    }
+
+    public void setBtnCadastrar(Button btnCadastrar) {
+        this.btnCadastrar = btnCadastrar;
+    }
+
+    public void setBtnEntrar(Button btnEntrar) {
+        this.btnEntrar = btnEntrar;
+    }
+
+    public void setTxtRsenha(TextView txtRsenha) {
+        this.txtRsenha = txtRsenha;
     }
 }

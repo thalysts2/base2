@@ -71,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextCpf" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editEmail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -90,9 +90,9 @@
         android:hint="Criar senha"
         android:inputType="textPassword"
         android:textColorHint="#BA304FFE"
-        app:layout_constraintEnd_toEndOf="@+id/editTextEmail"
-        app:layout_constraintStart_toStartOf="@+id/editTextEmail"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+        app:layout_constraintEnd_toEndOf="@+id/editEmail"
+        app:layout_constraintStart_toStartOf="@+id/editEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
     <Button
         android:id="@+id/buttonSalvar"
@@ -112,11 +112,10 @@
         app:layout_constraintVertical_bias="0.103" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/Voltar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:onClick="voltar"
         android:src="@drawable/ic_voltar"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintHorizontal_bias="0.545"
