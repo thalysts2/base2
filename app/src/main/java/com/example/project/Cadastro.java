@@ -34,8 +34,8 @@ public class Cadastro extends Activity {
     private EditText Nascimento;
     private EditText Email;
     private EditText Csenha;
-    private ImageButton Voltar;
     private Button Salvar;
+
 
 
     @Override
@@ -44,31 +44,20 @@ public class Cadastro extends Activity {
         setContentView(R.layout.activity_cadastro);
         Auth = FirebaseAuth.getInstance();
 
-        Nome = findViewById(R.id.editTextNome);
-        Cpf = findViewById(R.id.editTextCpf);
-        Nascimento= findViewById(R.id.editTextNascimento);
-        Email=findViewById(R.id.editEmail);
-        Csenha=findViewById(R.id.editTextCsenha);
-
         inicializaComponentes();
         eventoClicks();
     }
 
     private void eventoClicks() {
-        Voltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
         Salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void  onClick(View view) {
-                final String email = Email.getText().toString().trim();
-               final String nome = Nome.getText().toString().trim();
-                String senha = Csenha.getText().toString().trim();
-                final String cpf = Cpf.getText().toString().trim();
-                final String nascimento = Nascimento.getText().toString().trim();
+                 final String email = Email.getText().toString().trim();
+                 final String nome = Nome.getText().toString().trim();
+                 final String senha = Csenha.getText().toString().trim();
+                 final String cpf = Cpf.getText().toString().trim();
+                 final String nascimento = Nascimento.getText().toString().trim();
 
 //                criando metodo para constriur ususarios
                 criarUser(email, nome, senha,cpf,nascimento);
@@ -107,7 +96,7 @@ public class Cadastro extends Activity {
         });
     }
 
-    private void criarUser(final String email, final String nome, String senha,final String nascimento, final String cpf ) {
+    private void criarUser( final String email, final String nome, final String senha,final String nascimento, final String cpf ) {
         Auth.createUserWithEmailAndPassword(email,senha)
 //qual tela eu me encontro
                 .addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
@@ -152,14 +141,14 @@ public class Cadastro extends Activity {
         Csenha= findViewById(R.id.editTextCsenha);
         Nascimento= findViewById(R.id.editTextNascimento);
         Cpf = findViewById(R.id.editTextCpf);
+        Salvar= findViewById(R.id.buttonSalvar);
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-//        buscando a conexão
-        Auth = Conexao.getFirebaseAuth();
+        Auth= Conexao.getFirebaseAuth();
 
     }
 }

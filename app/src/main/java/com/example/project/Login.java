@@ -24,7 +24,7 @@ public class Login extends Activity {
 
     private FirebaseAuth Auth;
     private EditText Usuario;
-    private EditText Senha;
+    private EditText Csenha;
     private Button btnCadastrar, btnEntrar;
     private TextView txtRsenha;
 
@@ -38,6 +38,12 @@ public class Login extends Activity {
     }
 
     private void inicializarComponentes() {
+        Usuario= findViewById(R.id.editTextUsuario);
+        Csenha= findViewById(R.id.editTextCsenha);
+        btnCadastrar= findViewById(R.id.btnCadastrar);
+        btnEntrar= findViewById(R.id.btnEntrar);
+        txtRsenha= findViewById(R.id.txtRsenha);
+
     }
 
 
@@ -56,7 +62,7 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 String email = Usuario.getText().toString().trim();
-                String senha = Senha.getText().toString().trim();
+                String senha = Csenha.getText().toString().trim();
                 login(email, senha);
             }
         });
@@ -102,8 +108,8 @@ public class Login extends Activity {
         Usuario = usuario;
     }
 
-    public void setSenha(EditText senha) {
-        Senha = senha;
+    public void setSenha(EditText csenha) {
+        Csenha = csenha;
     }
 
     public void setBtnCadastrar(Button btnCadastrar) {

@@ -20,7 +20,7 @@ public class Perfil2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.acitivity_perfil);
         inicializaComponentes();
-//        ,etodo para onclick do botaoLogout
+//        metodo para onclick do botaoLogout
         eventoClick();
 
     }

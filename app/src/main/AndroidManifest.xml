@@ -7,11 +7,11 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Cadastro"
+        android:label="Login"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login">
+        <activity android:name="Login">
 
 
             <intent-filter>
@@ -20,7 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".Cadastro" />
+        <activity android:name=".Perfil2" />
+        <activity android:name=".ResetSenha" />
 
     </application>
 

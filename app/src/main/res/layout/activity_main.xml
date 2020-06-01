@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Login">
 
     <EditText
         android:id="@+id/editTextUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="251dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="21dp"
         android:drawableLeft="@drawable/ic_email_black_24dp"
         android:ems="10"
         android:hint="Usuário"
@@ -21,15 +21,17 @@
         android:src="@drawable/ic_email_black_24dp"
         android:textAlignment="textStart"
         android:textColorHint="#BA304FFE"
-        app:layout_constraintBottom_toTopOf="@+id/editTextCsenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextCsenha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="36dp"
         android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:ems="10"
         android:hint="Senha"
@@ -38,65 +40,50 @@
         android:src="@drawable/ic_lock_black_24dp"
         android:textAlignment="textStart"
         android:textColorHint="#BA304FFE"
-        app:layout_constraintBottom_toTopOf="@+id/btnEntrar"
-        app:layout_constraintEnd_toEndOf="@+id/editTextUsuario"
-        app:layout_constraintStart_toStartOf="@+id/editTextUsuario"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsuario" />
+        app:layout_constraintBottom_toTopOf="@+id/txtRsenha"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="32dp"
         android:backgroundTint="@android:color/holo_red_light"
-        android:onClick="login"
         android:text="Entrar"
         android:textColor="#FFFFFF"
         android:textColorHint="@android:color/background_light"
-        app:layout_constraintBottom_toTopOf="@+id/btnCadastrar"
-        app:layout_constraintEnd_toEndOf="@+id/editTextCsenha"
-        app:layout_constraintStart_toStartOf="@+id/editTextCsenha"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCsenha" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRsenha" />
 
     <Button
         android:id="@+id/btnCadastrar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="92dp"
         android:backgroundTint="#00FFFFFF"
-        android:onClick="cadastro"
         android:text="Cadastre-se"
         android:textColor="#BA304FFE"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnEntrar"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnEntrar"
-        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="123dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="268dp"
-        android:src="@drawable/logotipo"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/txtRsenha"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txtRsenha"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="253dp"
+        android:layout_marginTop="163dp"
+        android:layout_marginBottom="161dp"
         android:text="Esqueci minha senha"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btnCadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsuario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

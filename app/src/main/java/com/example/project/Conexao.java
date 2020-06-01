@@ -22,6 +22,7 @@ public class Conexao {
 // se o objeto for nulo eu devo criar
         if (firebaseAuth != null) {
             inicializarFirebaseAuth();
+
         }
         return firebaseAuth;
     }
