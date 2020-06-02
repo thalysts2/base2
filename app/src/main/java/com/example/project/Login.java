@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import static com.example.project.R.layout.activity_main;
 
@@ -35,6 +36,7 @@ public class Login extends Activity {
         setContentView(activity_main);
         inicializarComponentes();
         eventoClicks();
+        Auth = FirebaseAuth.getInstance();
     }
 
     private void inicializarComponentes() {
@@ -45,6 +47,22 @@ public class Login extends Activity {
         txtRsenha= findViewById(R.id.txtRsenha);
 
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //pegando o usuario atual QUE É mAuth
+        FirebaseUser currentUser = Auth.getCurrentUser();
+//        com esse usuario atual nós vamos falar para nossa view para se comportar de acordo com esse usuario
+        updateUI(currentUser);
+    }
+
+    //    criando a update
+    private void updateUI(FirebaseUser user){
+        if(user!= null){
+//            passar para a proxima tela! ses nós temos o usuario logado nós vamos passar para a proxima tela
+        }
+    }
+
 
 
     private void eventoClicks() {
@@ -62,8 +80,8 @@ public class Login extends Activity {
             @Override
             public void onClick(View v) {
                 String email = Usuario.getText().toString().trim();
-                String senha = Csenha.getText().toString().trim();
-                login(email, senha);
+                String password = Csenha.getText().toString().trim();
+//                login(email,password);
             }
         });
         txtRsenha.setOnClickListener(new View.OnClickListener() {
@@ -75,14 +93,18 @@ public class Login extends Activity {
         });
     }
 
-    private void login(String email, String senha) {
+    private void login(String email, String password) {
 //        chamando o objeto aut para autenticar
-        Auth.signInWithEmailAndPassword(email, senha)
-//                passando a activity onde estou
+        Auth.signInWithEmailAndPassword(email, password)
+//                passando a activity onde estou para perfil
                 .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+//                            então se deu tudo certo, posso pegar e dar um updateUI no usuario
+//                    ou seja nós vamos passar para a proxima tela
+                            updateUI(Auth.getCurrentUser());
+//                    caso der errado
 //                            para onde vamos dirigir ao final da configuração
                             Intent i = new Intent(Login.this, Perfil2.class);
                             startActivity(i);
@@ -93,16 +115,13 @@ public class Login extends Activity {
                 });
     }
 
+
     private void alert(String email_ou_senha_errados) {
         Toast.makeText(com.example.project.Login.this, email_ou_senha_errados, Toast.LENGTH_SHORT).show();
+        updateUI(null);
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Auth = Conexao.getFirebaseAuth();
-    }
 
     public void setUsuario(EditText usuario) {
         Usuario = usuario;

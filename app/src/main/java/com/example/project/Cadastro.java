@@ -53,11 +53,11 @@ public class Cadastro extends Activity {
         Salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void  onClick(View view) {
-                 final String email = Email.getText().toString().trim();
-                 final String nome = Nome.getText().toString().trim();
-                 final String senha = Csenha.getText().toString().trim();
-                 final String cpf = Cpf.getText().toString().trim();
-                 final String nascimento = Nascimento.getText().toString().trim();
+                final String email = Email.getText().toString().trim();
+                final String nome = Nome.getText().toString().trim();
+                final String senha = Csenha.getText().toString().trim();
+                final String cpf = Cpf.getText().toString().trim();
+                final String nascimento = Nascimento.getText().toString().trim();
 
 //                criando metodo para constriur ususarios
                 criarUser(email, nome, senha,cpf,nascimento);
@@ -115,7 +115,7 @@ public class Cadastro extends Activity {
                             userInfos.put("email",email);
                             userInfos.put("nascimento",nascimento);
                             userInfos.put("cpf",cpf);
-                            
+
 //                    pegando a referencia
                             userRef.setValue(userInfos);
                             finish();
